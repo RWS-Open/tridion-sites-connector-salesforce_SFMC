@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E47A50B-A1BC-4C68-81F4-6D96F971FA11}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		nuget.config = nuget.config
+		.azure\pipeline-build-addon.yml = .azure\pipeline-build-addon.yml
+		Salesforce.sln.DotSettings = Salesforce.sln.DotSettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC3E8D45-6023-4723-A465-A0EBCBFA67DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DE54A011-8019-4BF1-A7CE-56DC305752DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdl.Connectors.Tridion.SalesforceConnector", "src\Sdl.Connectors.Tridion.SalesforceConnector\Sdl.Connectors.Tridion.SalesforceConnector.csproj", "{21B0F708-EE9C-4BB3-9D0D-62C89F78868B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdl.Connectors.Tridion.SalesforceDeployerConnector", "src\Sdl.Connectors.Tridion.SalesforceDeployerConnector\Sdl.Connectors.Tridion.SalesforceDeployerConnector.csproj", "{109FCCF4-F4C6-4747-AFF7-69BCBF941169}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesforceAddon.Build", "src\SalesforceAddon.Build\SalesforceAddon.Build.csproj", "{47F57CCD-F1B4-4ADE-9ED3-C37BDB3E9C81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesforceConnector.Tests", "tests\SalesforceConnector.Tests\SalesforceConnector.Tests.csproj", "{C830189F-12E8-42AA-AC94-08C144847DA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21B0F708-EE9C-4BB3-9D0D-62C89F78868B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B0F708-EE9C-4BB3-9D0D-62C89F78868B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B0F708-EE9C-4BB3-9D0D-62C89F78868B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B0F708-EE9C-4BB3-9D0D-62C89F78868B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{109FCCF4-F4C6-4747-AFF7-69BCBF941169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{109FCCF4-F4C6-4747-AFF7-69BCBF941169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{109FCCF4-F4C6-4747-AFF7-69BCBF941169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{109FCCF4-F4C6-4747-AFF7-69BCBF941169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F57CCD-F1B4-4ADE-9ED3-C37BDB3E9C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F57CCD-F1B4-4ADE-9ED3-C37BDB3E9C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F57CCD-F1B4-4ADE-9ED3-C37BDB3E9C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F57CCD-F1B4-4ADE-9ED3-C37BDB3E9C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C830189F-12E8-42AA-AC94-08C144847DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C830189F-12E8-42AA-AC94-08C144847DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C830189F-12E8-42AA-AC94-08C144847DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C830189F-12E8-42AA-AC94-08C144847DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21B0F708-EE9C-4BB3-9D0D-62C89F78868B} = {CC3E8D45-6023-4723-A465-A0EBCBFA67DB}
+		{109FCCF4-F4C6-4747-AFF7-69BCBF941169} = {CC3E8D45-6023-4723-A465-A0EBCBFA67DB}
+		{47F57CCD-F1B4-4ADE-9ED3-C37BDB3E9C81} = {CC3E8D45-6023-4723-A465-A0EBCBFA67DB}
+		{C830189F-12E8-42AA-AC94-08C144847DA9} = {DE54A011-8019-4BF1-A7CE-56DC305752DE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE5771F2-BA1D-4CF6-B63E-0F92095847B3}
+	EndGlobalSection
+EndGlobal

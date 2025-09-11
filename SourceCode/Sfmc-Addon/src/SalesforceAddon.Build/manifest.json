@@ -1,0 +1,29 @@
+{
+  "manifestVersion": "1.0",
+  "version": "1.0.0",
+  "id": "SalesforceMarketingCloudAddon",
+  "name": "Salesforce Marketing Cloud",
+  "author": "RWS Group",
+  "description": "Connector for Saleforce Marketing Cloud",
+  "requireConfiguration": "Yes",
+  "extensions": [
+    {
+      "name": "SalesforceConnector",
+      "type": "Connector",
+      "properties": {
+        "connectorLibrary": "Connector/Sdl.Connectors.Tridion.SalesforceConnector.dll",
+        "connectorRuntime": "DotNetStandard"
+      }
+    },
+    {
+      "name": "SalesforceDeployerConnector",
+      "type": "DeployConnector",
+      "properties": {
+        "connectorLibrary": "DeployConnector/Sdl.Connectors.Tridion.SalesforceDeployerConnector.dll",
+        "connectorRuntime": "DotNetStandard",
+        "configuration": {
+        }
+      }
+    }
+  ]
+}

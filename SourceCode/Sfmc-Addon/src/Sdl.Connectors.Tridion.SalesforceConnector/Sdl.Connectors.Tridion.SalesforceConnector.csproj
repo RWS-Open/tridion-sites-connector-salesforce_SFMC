@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Assembly / Project -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Sdl.Connectors.Tridion.SalesforceConnector</AssemblyName>
+    <RootNamespace>Sdl.Connectors.Tridion.SalesforceConnector</RootNamespace>
+    <Version>1.0.0</Version>
+    <LangVersion>7.3</LangVersion>
+
+    <!-- Analyzers -->
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Sdl.Connectors.SalesforceContentService" Version="1.6.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="Sdl.Connectors.Common" Version="1.4.7.2" />
+    <PackageReference Include="Sdl.Connectors.ContentService" Version="1.1.5.3" />
+    <PackageReference Include="Sdl.Connectors.Core" Version="1.3.5" />
+    <PackageReference Include="Tridion.ConnectorFramework.Connector.SDK" Version="42.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="AddonPackage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Make sure that the files, manifest.json and {Connector}.json, are copied to the output, together with needed images (icons, thumbnails, etc.) -->
+    <None Update="Images\salesforce_16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\salesforce_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\salesforce_48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- The targets and properties below are here to publish the project and create a package for AddonService -->
+  <!-- This step will auto trigger publishing the connector and packaging it into a zip file with the configuration file alongside -->
+  <Target Name="PublishAfterBuild" AfterTargets="PostBuildEvent">
+    <CallTarget Targets="PublishConnector" />
+  </Target>
+
+  <PropertyGroup>
+    <ConnectorName>SalesforceConnector</ConnectorName>
+
+    <PackagesDir>$(MSBuildProjectDirectory)\AddonPackage</PackagesDir>
+    <PublishDir>$(PackagesDir)\$(ConnectorName)</PublishDir>
+  </PropertyGroup>
+
+  <Target Name="PublishConnector">
+    <Message Text="**************** CLEAN PUBLISH FOLDER ****************" Importance="high" />
+    <RemoveDir Directories="$(PublishDir)" />
+
+    <Message Text="**************** PUBLISHING CONNECTOR ****************" Importance="high" />
+    <CallTarget Targets="PublishWithoutBuilding" />
+
+    <Message Text="****************** CREATING PACKAGE ******************" Importance="high" />
+    <CallTarget Targets="CreateAddonPackage" />
+  </Target>
+
+  <!-- Publishing connector so it will have its dependent assemblies in the package -->
+  <Target Name="PublishWithoutBuilding" DependsOnTargets="$(ResolveReferences);$(_CorePublishTargets)" />
+
+  <!-- Creating connector package from publshied folder -->
+  <Target Name="CreateAddonPackage">
+    <PropertyGroup>
+      <ZipFilePath>$(PackagesDir)\$(ConnectorName)-$(Version)-package.zip</ZipFilePath>
+    </PropertyGroup>
+
+    <MakeDir Condition="!Exists('$(PackagesDir)')" Directories="$(PackagesDir)" />
+    <Delete Condition="Exists('$(ZipFilePath)')" Files="$(ZipFilePath)" />
+
+    <!-- Compressing published files for Windows -->
+    <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell.exe -nologo -noprofile -command &quot;&amp; { Add-Type -A System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::CreateFromDirectory('$(PublishDir)', '$(ZipFilePath)'); }&quot;" />
+
+    <!-- Compressing published files non-Windows OS -->
+    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="cd $(PublishDir); zip -r $(ZipFilePath) *" />
+  </Target>
+</Project>

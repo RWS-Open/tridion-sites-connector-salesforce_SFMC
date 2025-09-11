@@ -1,0 +1,151 @@
+﻿@model PageModel
+
+@{
+    var mymodel = Model;
+}
+<div id="solar-panel" class="wrapper">
+    <!-- Header Section -->
+    @Html.DxaRegion("Header")
+	<div id="Searchroot"></div>
+	<div class="pageroot">
+	@Html.DxaRegion("Main")
+    <!-- Product Banner -->
+    @Html.DxaRegion("Product Banner")
+    <!-- solutions Section -->
+    @Html.DxaRegion("Solar Products")
+    <!-- Related Content Section -->
+    @Html.DxaRegion("Related Content")
+
+    <!-- Rquest info Section -->
+	@**
+    <section id="request-info" class="mx-auto bg-white py-3">
+        <div class="container-fluid">
+            <h6 class="text-center py-4 my-2 text-uppercase offerings-title position-relative">@Html.Resource("core.RequestInformation")</h6>
+            <p class="text-center pb-3 my-2 sub-heading">@Html.Resource("core.RequestFormSubheading")</p>
+            <div class="row">
+                <div class="col-md-5 mx-auto">
+                    <form autocomplete="off">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="firstname" placeholder=@Html.Resource("core.FirstName") required/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="lastname" placeholder=@Html.Resource("core.LastName") required/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="tel" class="form-control" id="tel-number" placeholder=@Html.Resource("core.TelephoneNumber") required/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" id="email" placeholder=@Html.Resource("core.Email") required/>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mx-auto text-center">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
+                                <label class="form-check-label" for="inlineRadio1">@Html.Resource("core.SolarPanels")</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
+                                <label class="form-check-label" for="inlineRadio2">@Html.Resource("core.EnergyBatteries")</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mx-auto text-center">
+                            <button type="submit" class="btn btn-secondary px-4 py-2 my-4">@Html.Resource("core.RequestNow")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+	**@
+	</div>
+    <!-- chat section -->
+    <section id="chat" class="chat-panel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 p-0">
+					<div class="position-fixed chat-btn-position">
+						<!-- Chat icon -->
+						<div class="chat-btn">
+							<button type="button" class="btn btn-primary rounded-circle">
+								<i class="material-icons md-125 m-2">chat_bubble</i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 p-0 position-fixed bg-white chat-box">
+					<div class="messaging">
+						<div class="inbox_msg">
+							<div class="chat-header tex-white text-left px-3 py-2 border-top-left">
+								<h6><span>SOLAR</span><span>Panels</span></h6>
+								<p>Typically replies in a day</p>
+							</div>
+							<div class="container-fluid">
+								<div class="row">
+									<div class="chat-body p-2">
+										<div class="w-auto float-left clearfix incoming-chat p-1 animated fadeIn" id="chat1">
+											<div class="col-md-auto p-1">
+												<div class="chat-msg">
+													<p class="m-0 p-3">Welcome to the agent chat.</p>
+												</div>
+											</div>
+										</div>
+										<div class="w-auto float-right clearfix outgoing-chat p-1 fadeIn animated" id="chat2">
+											<div class="col-md-auto p-1">
+												<div class="chat-msg">
+													<p class="m-0 p-3">Est-ce les panneaux sont  disponibles en France? </p>
+												</div>
+											</div>
+											<div class="chat-translation pl-3 animated fadeIn" id="chat3">
+												<p class="m-0">English translation:</p>
+												<p class="m-0 translated-text">Are the panels available in France? </p>
+											</div>
+										</div>
+										<div class="w-auto float-left clearfix incoming-chat p-1 fadeIn animated" id="chat4">
+											<div class="col-md-auto p-1">
+												<div class="chat-msg">
+													<p class="m-0 p-3">Yes we do ship the panels to France or you can find them at Solutions Solaire </p>
+												</div>
+											</div>
+											<div class="chat-translation pl-3 animated fadeIn" id="chat5">
+												<p class="m-0">French Response:</p>
+												<p class="m-0 translated-text">Oui oui on peut expédier les panneaux en france. Ils sont également disponibles chez Solutions Solaires. </p>
+											</div>
+										</div>
+										<div class="w-auto float-right clearfix outgoing-chat p-1 fadeIn animated" id="chat6">
+											<div class="col-md-auto p-1">
+												<div class="chat-msg">
+													<p class="m-0 p-3">Merci! </p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="input-group border-top position-absolute chat-input">
+										<input type="text" class="form-control border-0" id="inlineFormInputGroup" placeholder="@Html.Resource("core.SendMessage")...">
+										<div class="input-group-apend border-0 d-flex align-content-center">
+											<div class="input-group-text bg-white border-0">
+												<i class="gif material-icons md-175 mx-1">gif</i>
+												<i class="faces material-icons md-175 mx-1">sentiment_satisfied_alt</i>
+												<i class="attach material-icons md-175 mx-1">attachment</i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
+    
+    
+    
+    <!-- Footer section -->
+    @Html.DxaRegion("Footer")
+
+
+
+</div>

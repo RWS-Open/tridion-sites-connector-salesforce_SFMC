@@ -1,0 +1,26 @@
+{
+	"configuration": {
+		"SFMCTemplates": {
+			"namespaces": {
+				"salesforcemarketingcloud": {
+              "publicationIds": [42],
+					"markupContent": {
+						"entityType": "CodeSnippet",
+						"tcmUriPropertyName": "tridionId"
+					},
+					"binaryContent": {
+						"entityType": "Image",
+						"publicUriPropertyName": "publishedUrl",
+						"tcmUriPropertyName": "tridionId"
+					},
+					"mirrorCmsStructure": false,
+					"templateFolder": "sfmc",
+					"deployToBroker": false
+				}
+			}
+		}
+	},
+	"staging": {
+		"isEnabled": true
+	}
+}
