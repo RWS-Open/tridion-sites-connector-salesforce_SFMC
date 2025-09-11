@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               Version="8.5"
+               xsi:noNamespaceSchemaLocation="schemas/cd_ambient_conf.xsd">
+   
+    <!-- Claims for forwarding on to the Content Services -->
+    <ForwardedClaims CookieName="TAFContext">
+        <Claim Uri="taf:session:preview:preview_session"/>
+
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:browser"/>
+        <Claim Uri="taf:claim:ambientdata:footprintcartridge:acceptlanguage"/>
+        <Claim Uri="taf:claim:ambientdata:footprintcartridge:recurringvisitor"/>
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:os"/>
+        <Claim Uri="taf:claim:ambientdata:footprintcartridge:searchquery"/>
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:session:lifetime"/>
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:refererdomain"/>
+		<Claim Uri="taf:request:cookies" />
+        <Claim Uri="taf:request:headers"/>
+        <Claim Uri="taf:request:full_url" />
+		<Claim Uri="taf:claim:ambientdata:definedtriggertypes"/>
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:isbot"/>
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:authorization:type"/>
+        <Claim Uri="taf:claim:ambientdata:sessioncartridge:authorization:isauthenticated"/>
+		<Claim Uri="taf:claim:integration:contact:email"/>
+		<Claim Uri="taf:claim:integration:contact:name"/>
+		<Claim Uri="taf:claim:integration:contact:segment"/>
+		<Claim Uri="taf:claim:visitor:segment"/>
+		<Claim Uri="taf:claim:visitor:searchquery"/>
+		<Claim Uri="taf:claim:visitor:leadscore"/>
+		<Claim Uri="taf:claim:visitor:referrer"/>
+      <Claim Uri="taf:claim:context:device:displayWidth" />
+      <Claim Uri="taf:claim:context:device:inputDevices" />
+      <Claim Uri="taf:claim:context:device:mobile" />
+      <Claim Uri="taf:claim:context:device:model" />
+      <Claim Uri="taf:claim:context:device:orientation" />
+      <Claim Uri="taf:claim:context:device:pixelDensity" />
+      <Claim Uri="taf:claim:context:device:pixelRatio" />
+      <Claim Uri="taf:claim:context:device:tablet" />
+      <Claim Uri="taf:claim:context:device:vendor" />
+      <Claim Uri="taf:claim:context:os:model" />
+      <Claim Uri="taf:claim:context:os:vendor" />
+      <Claim Uri="taf:claim:context:visitor:destination" />
+      <Claim Uri="taf:claim:context:visitor:searchTerms" />
+	  <Claim Uri="taf:claim:visitor:country" />
+		<Claim Uri="taf:claim:visitor:location" />
+    </ForwardedClaims>
+
+    <Security>     
+      
+        <!-- Ambient data framework claims forwarding is allowed only for claims listed in this section.   -->
+        <GloballyAcceptedClaims>
+            <Claim Uri="taf:session:preview:preview_session"/>
+
+            <Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:browser"/>
+            <Claim Uri="taf:claim:ambientdata:footprintcartridge:acceptlanguage"/>
+            <Claim Uri="taf:claim:ambientdata:footprintcartridge:recurringvisitor"/>
+            <Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:os"/>
+            <Claim Uri="taf:claim:ambientdata:footprintcartridge:searchquery"/>
+            <Claim Uri="taf:claim:ambientdata:sessioncartridge:session:lifetime"/>
+            <Claim Uri="taf:claim:ambientdata:sessioncartridge:refererdomain"/>
+			      <Claim Uri="taf:request:cookies" />
+	          <Claim Uri="taf:request:headers"/>
+	          <Claim Uri="taf:request:full_url" />
+			      <Claim Uri="taf:claim:ambientdata:definedtriggertypes"/>
+	          <Claim Uri="taf:claim:ambientdata:sessioncartridge:useragent:isbot"/>
+	          <Claim Uri="taf:claim:ambientdata:sessioncartridge:authorization:type"/>
+	          <Claim Uri="taf:claim:ambientdata:sessioncartridge:authorization:isauthenticated"/>
+			  <Claim Uri="taf:claim:visitor:segment"/>
+			  <Claim Uri="taf:claim:integration:contact:email"/>
+		<Claim Uri="taf:claim:integration:contact:name"/>
+		<Claim Uri="taf:claim:integration:contact:segment"/>
+		<Claim Uri="taf:claim:visitor:searchquery"/>
+		<Claim Uri="taf:claim:visitor:leadscore"/>
+		<Claim Uri="taf:claim:visitor:referrer"/>
+          <Claim Uri="taf:claim:context:device:displayWidth" />
+          <Claim Uri="taf:claim:context:device:inputDevices" />
+          <Claim Uri="taf:claim:context:device:mobile" />
+          <Claim Uri="taf:claim:context:device:model" />
+          <Claim Uri="taf:claim:context:device:orientation" />
+          <Claim Uri="taf:claim:context:device:pixelDensity" />
+          <Claim Uri="taf:claim:context:device:pixelRatio" />
+          <Claim Uri="taf:claim:context:device:tablet" />
+          <Claim Uri="taf:claim:context:device:vendor" />
+          <Claim Uri="taf:claim:context:os:model" />
+          <Claim Uri="taf:claim:context:os:vendor" />
+          <Claim Uri="taf:claim:context:visitor:destination" />
+          <Claim Uri="taf:claim:context:visitor:searchTerms" />
+			<Claim Uri="taf:claim:visitor:country" />
+			<Claim Uri="taf:claim:visitor:location" />
+        </GloballyAcceptedClaims>
+     
+    </Security>
+
+    <!-- Cookies settings -->
+
+    <Cookies>
+        <CookieClaim DefaultValue="true" Name="CookieClaim"/>
+        <Cookie Type="Tracking" Name="myTrackingCookie" Path="/"/>
+        <Cookie Type="Session" Name="mySessionCookie" Path="/"/>
+        <Cookie Type="ADF" Name="TAFContext" />
+    </Cookies>
+  <ClaimStoreProvider>com.tridion.ambientdata.claimstore.providers.DotNetClaimStoreProvider</ClaimStoreProvider>
+</Configuration>

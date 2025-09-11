@@ -1,0 +1,23 @@
+﻿@model Teaser
+
+@{
+   var mymodel = Model;
+}
+
+<section class="p-banner"  @Html.DxaEntityMarkup()>
+    <div class="jumbotron jumbotron-fluid product-banner position-relative" @Html.DxaPropertyMarkup(() => Model.Media)>
+        <img src=@Model.Media.Url alt="" class="img-fluid position-absolute">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-6 mx-auto text-center">
+                    <h1 class="h4 text-white banner-text text-uppercase position-relative animated fadeInLeft" @Html.DxaPropertyMarkup(() => Model.Headline)>
+                        @Model.Headline
+                    </h1>
+                    <p class="text-white pt-4 sub-heading animated fadeInUp delay-1s" @Html.DxaPropertyMarkup(() => Model.Text)>@Model.Text</p>
+                    <a href="/content/pdf/download.pdf" class="btn btn-light mt-2 py-2 px-4 jmb-btn text-uppercase" @Html.DxaPropertyMarkup(() => Model.Link.LinkText) download>@Model.Link.LinkText</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

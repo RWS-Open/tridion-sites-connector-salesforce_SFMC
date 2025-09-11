@@ -1,0 +1,19 @@
+﻿@model DocsDownloadItems
+
+@{
+    var mymodel = Model;
+}
+
+@foreach (PdfDownload pair in Model.Settings)
+    {
+
+    <div class="card bg-light border-light mb-3">
+        <div class="card-body">            
+            <h6 class="doc-title position-relative mb-2">@pair.Name</h6>
+            <p class="card-text">@pair.PairValue</p>
+        </div> 
+        <div class="card-footer download-btn p-3">
+            <a href="@pair.UrlLink" class="text-uppercase btn btn-outline-secondary px-4">@Html.Resource("core.Download")</a>
+        </div>
+    </div>
+}

@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- This is the version that will be used when creating the addon package -->
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sdl.Connectors.Tridion.SalesforceConnector\Sdl.Connectors.Tridion.SalesforceConnector.csproj" >
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Sdl.Connectors.Tridion.SalesforceDeployerConnector\Sdl.Connectors.Tridion.SalesforceDeployerConnector.csproj">
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="AddonPackage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SalesforceAddonConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <!-- No need to keep generated .dll and output files -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!-- Deleting generated files for Windows -->
+    <Exec Condition="'$(OS)' == 'Windows_NT'" Command="del $(OutDir)\SalesforceAddon.Build.dll&#xD;&#xA;del $(OutDir)\SalesforceAddon.Build.deps.json" />
+    <!-- Deleting generated files for non-Windows OS -->
+    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="rm $(OutDir)SalesforceAddon.Build.dll;rm $(OutDir)SalesforceAddon.Build.deps.json" />
+  </Target>
+
+  <!-- The targets and properties below are to create a package for the AddonService containing both SalesforcetoConnector & SalesforcetoDeployConnector -->
+
+  <!-- This step will auto trigger publishing the connector and packaging it into a zip file with the configuration file alongside -->
+  <Target Name="PublishAfterBuild" AfterTargets="PostBuildEvent">
+    <CallTarget Targets="PackAddon" />
+  </Target>
+
+  <!-- Declarations -->
+  <PropertyGroup>
+    <_AddonName>SalesforceMarketingCloudAddon</_AddonName>
+
+    <_PackageDir>$(MSBuildProjectDirectory)\AddonPackage</_PackageDir>
+    <_PublishDir>$(_PackageDir)\$(_AddonName)</_PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_SalesforceConnectorFiles Include="..\Sdl.Connectors.Tridion.SalesforceConnector\AddonPackage\SalesforceConnector\**\*" />
+    <_SalesforceDeployConnectorFiles Include="..\Sdl.Connectors.Tridion.SalesforceDeployerConnector\AddonPackage\SalesforceDeployerConnector\**\*" />
+    <_SalesforceManifestFile Include="$(MSBuildProjectDirectory)\manifest.json" />
+    <_SalesforceConfigFile Include="$(MSBuildProjectDirectory)\SalesforceAddonConfiguration.json" />
+  </ItemGroup>
+
+  <!-- Pack Steps -->
+  <Target Name="PackAddon">
+
+
+    <Message Text="**************** COPY CONNECTORS ****************" Importance="high" />
+    <CallTarget Targets="PrepareForPacking" />
+
+    <Message Text="****************** CREATING PACKAGE ******************" Importance="high" />
+    <CallTarget Targets="CreateAddonPackage" />
+
+    <Message Text="**************** CLEAN OUTPUT FOLDER ****************" Importance="high" />
+    <RemoveDir Directories="$(_PublishDir)" />
+  </Target>
+
+  <Target Name="PrepareForPacking">
+    <!-- Copy SalesforcetoConnector folder -->
+    <Copy SourceFiles="@(_SalesforceConnectorFiles)" DestinationFiles="@(_SalesforceConnectorFiles->'$(_PublishDir)\Connector\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <!-- Copy SalesforcetoDeployConnector folder -->
+    <Copy SourceFiles="@(_SalesforceDeployConnectorFiles)" DestinationFiles="@(_SalesforceDeployConnectorFiles->'$(_PublishDir)\DeployConnector\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <!-- Copy manifest.json -->
+    <Copy SourceFiles="@(_SalesforceManifestFile)" DestinationFolder="@(_SalesforceManifestFile->'$(_PublishDir)')" />
+
+    <!-- Copy SalesforcetoAddonConfiguration.json -->
+    <Copy SourceFiles="@(_SalesforceConfigFile)" DestinationFolder="@(_SalesforceConfigFile->'$(_PackageDir)')" />
+  </Target>
+
+  <Target Name="CreateAddonPackage">
+    <PropertyGroup>
+      <ZipFilePath>$(_PackageDir)\$(_AddonName)-$(Version)-package.zip</ZipFilePath>
+    </PropertyGroup>
+
+    <MakeDir Condition="!Exists('$(_PackageDir)')" Directories="$(_PackageDir)" />
+    <Delete Condition="Exists('$(ZipFilePath)')" Files="$(ZipFilePath)" />
+
+    <!-- Compressing published files for Windows -->
+    <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell.exe -nologo -noprofile -command &quot;&amp; { Add-Type -A System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::CreateFromDirectory('$(_PublishDir)', '$(ZipFilePath)'); }&quot;" />
+
+    <!-- Compressing published files non-Windows OS -->
+    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="cd $(_PublishDir); zip -r $(ZipFilePath) *" />
+  </Target>
+</Project>

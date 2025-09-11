@@ -1,0 +1,2 @@
+Create the component 
+	300 -> BB-> Forms-> Request Information

@@ -1,0 +1,54 @@
+{
+  "configuration": {
+    "SalesforceConnector": {
+      "configuration": {
+        "ClientId": "***",
+        "ClientSecret": "***",
+        "HostUrl": "https://mczhbl9dtbdd8778yh71c46x8p-4.auth.marketingcloudapis.com",
+        "AccountId": ****
+      }
+    },
+    "SalesforceDeployerConnector": {
+      "configuration": {
+        "ClientId": "***",
+        "ClientSecret": "***",
+        "HostUrl": "https://mczhbl9dtbdd8778yh71c46x8p-4.auth.marketingcloudapis.com",
+        "AccountId": ****,
+        "localeMapping": [
+          {
+            "publicationIds": [ "42" ],
+            "locale": "source"
+          }
+        ],
+		 "MarkupUploadCategoryId": 128802,
+        "ImagesUploadCategoryId": 128806
+      }
+    }
+  },
+
+  "sitesCm": {
+    "isEnabled": true,
+    "SalesforceConnector": {
+      "namespaces": {
+        "sfmc": {
+          "displayName": "Salesforce Marketing Cloud",
+          "stubFolders": [ "tcm:2-167-2" ]
+        }
+      }
+    }
+  },
+
+  "staging": {
+    "isEnabled": true,
+    "SalesforceConnector": {
+      "namespaces": {
+        "sfmc": {}
+      }
+    },
+    "SalesforceDeployerConnector": {
+      "namespaces": {
+        "salesforcemarketingcloud": {}
+      }
+    }
+  }
+}
